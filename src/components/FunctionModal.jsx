@@ -61,6 +61,7 @@ const FunctionModal = ({
         <Function>
           Next Function
           <FunctionSelect disabled>
+            <option value=''>-</option>
             {modals.map(modal => (
               <option
                 value={modal.modalKey}
