@@ -13,6 +13,13 @@ export default [
     previousModalKey: "function1",
   },
   {
+    name: "Function 3",
+    modalKey: "function3",
+    order: 3,
+    nextModalKey: null,
+    previousModalKey: "function5",
+  },
+  {
     name: "Function 4",
     modalKey: "function4",
     order: 4,
@@ -25,12 +32,5 @@ export default [
     order: 5,
     nextModalKey: "function3",
     previousModalKey: "function4",
-  },
-  {
-    name: "Function 3",
-    modalKey: "function3",
-    order: 3,
-    nextModalKey: null,
-    previousModalKey: "function5",
   },
 ];

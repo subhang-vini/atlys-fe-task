@@ -3,9 +3,22 @@ import {
   InputComponentWrapper,
   InputComponent
 } from '../styles/style'
+import InputOutputDot from './InputOutputDot'
 // import debounce from 'lodash.debounce'
 
-const InputOutput = ({ moduleVar, moduleVarSetter, isOutputModule }) => {
+const InputOutput = ({
+  moduleVar,
+  moduleVarSetter,
+  isOutputModule,
+  setInputNodePosition = () => {},
+  setOutputNodePosition = () => {}
+}) => {
+  const setOutputPositionCb = position => {
+    setOutputNodePosition('finalOutput', position)
+  }
+  const setInputPositionCb = position => {
+    setInputNodePosition('entryPoint', position)
+  }
   if (isOutputModule) {
     return (
       <div>
@@ -17,6 +30,7 @@ const InputOutput = ({ moduleVar, moduleVarSetter, isOutputModule }) => {
             readOnly
             isOutputModule
           ></InputComponent>
+          <InputOutputDot setPosition={setOutputPositionCb} />
         </InputComponentWrapper>
       </div>
     )
@@ -30,6 +44,7 @@ const InputOutput = ({ moduleVar, moduleVarSetter, isOutputModule }) => {
           value={moduleVar}
           onChange={e => moduleVarSetter(e.target.value)}
         ></InputComponent>
+        <InputOutputDot setPosition={setInputPositionCb} />
       </InputComponentWrapper>
     </div>
   )

@@ -7,18 +7,22 @@ import {
   Equation,
   EquationInput,
   Function,
-  FunctionSelect
+  FunctionSelect,
+  InputOutputDotsContainer,
+  FlexContainer,
+  Error
 } from '../styles/style'
 import modals from '../constants/modals'
-import debounce from 'lodash.debounce'
+import InputOutputDot from './InputOutputDot'
 
 const FunctionModal = ({
   modalKey,
-  //   previousModalKey,
   nextModalKey,
   setOutputValue,
   inputValue,
-  name
+  name,
+  setInputNodePosition = () => {},
+  setOutputNodePosition = () => {}
 }) => {
   const [inputString, setInputString] = useState('')
   const [errorState, setError] = useState(null)
@@ -29,35 +33,24 @@ const FunctionModal = ({
         setError(error)
       } else {
         setError(null)
-        setOutputValue(nextModalKey, parseFunction(result, inputValue))
-        // debounce(
-        //   () => setOutputValue(nextModalKey, parseFunction(result, inputValue)),
-        //   1000
-        // )
+        try {
+          setOutputValue(nextModalKey, parseFunction(result, inputValue))
+        } catch (e) {
+          setError('Invalid Expression')
+        }
       }
     }
   }, [inputValue, inputString])
 
-  // const handleBlur = () => {
-  //   const { error, result } = validator(inputString)
-  //   if (error) {
-  //     setError(error)
-  //   } else {
-  //     setError(null)
-  //     setOutputValue(nextModalKey, parseFunction(result, inputValue))
-  //   }
-  // }
+  const setInputPositionCb = position => {
+    setInputNodePosition(modalKey, position)
+  }
+  const setOutputPositionCb = position => {
+    setOutputNodePosition(modalKey, position)
+  }
   return (
     <Modal>
       <ModalTitle>{name}</ModalTitle>
-      {/* <div>{inputValue}</div>
-      <input
-        type='text'
-        value={inputString}
-        onChange={e => setInputString(e.target.value)}
-        // onBlur={handleBlur}
-      ></input>
-      {errorState && <div>{errorState}</div>} */}
       <Equation>
         Equation
         <EquationInput
@@ -79,8 +72,18 @@ const FunctionModal = ({
             ))}
           </FunctionSelect>
         </Function>
-        {errorState && <div>{errorState}</div>}
+        {errorState && <Error>{errorState}</Error>}
       </Equation>
+      <InputOutputDotsContainer>
+        <FlexContainer>
+          <InputOutputDot setPosition={setInputPositionCb} />
+          <div>input</div>
+        </FlexContainer>
+        <FlexContainer>
+          <div>output</div>
+          <InputOutputDot setPosition={setOutputPositionCb} />
+        </FlexContainer>
+      </InputOutputDotsContainer>
     </Modal>
   )
 }

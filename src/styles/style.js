@@ -3,9 +3,8 @@ import dots from "../assets/dots.svg";
 import arrow from "../assets/chevron-down.svg";
 export const Container = styled.div`
   display: flex;
-  flex-wrap: wrap;
   gap: 10px;
-  align-items: flex-end;
+  align-items: center;
 `;
 
 export const Modal = styled.div`
@@ -14,6 +13,7 @@ export const Modal = styled.div`
   border-radius: 15px;
   background: #fff;
   box-shadow: 0px 0px 6px 0px #0000000d;
+  width: 235px;
 `;
 
 export const ModalTitle = styled.h1`
@@ -81,6 +81,8 @@ export const InputComponent = styled.input`
   &:focus-visible {
     outline: none;
   }
+  position: relative;
+  z-index: 3;
 `;
 
 export const InputIcon = styled.div``;
@@ -95,6 +97,8 @@ export const Equation = styled.label`
   line-height: 14.52px;
   text-align: left;
   color: #252525;
+  position: relative;
+  z-index: 3;
 `;
 export const EquationInput = styled.input`
   width: 100%;
@@ -135,4 +139,56 @@ export const FunctionSelect = styled.select`
   background-repeat: no-repeat;
   background-size: 14px 14px;
   background-position: 95%;
+`;
+
+export const InputOutputDotsContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 45px;
+`;
+export const InputOutputDotContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  border: 2px solid #dbdbdb;
+  background-color: #fff;
+  border-radius: 50%;
+  margin: auto;
+`;
+export const InputOutputDot = styled.div`
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #66a3ff;
+`;
+export const FlexContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 4px;
+`;
+export const Text = styled.p`
+  color: #585757;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 12.1px;
+  text-align: left;
+`;
+export const ModalWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 100px 0px;
+`;
+
+export const Error = styled.div`
+  color: red;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 14.52px;
+  text-align: left;
+  margin-top: 10px;
+  position: absolute;
+  bottom: -20px;
 `;
